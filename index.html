@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>jQuery Github Contribution Graph Examples</title>
+  <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/github_contribution.js"></script>
+  
+  <link href="css/github_contribution_graph.css" media="all" rel="stylesheet" />
+
+  <script type="text/javascript">
+
+
+//Author: bachvtuan@gmail.com
+var starttime = (new Date().getHours()*60)+(new Date().getMinutes());
+
+chartData = {
+   "startTime":1500,
+   "duration":"120",
+   "step":"10",
+   "boxSize":"20",
+   "priority":[
+      "app-control",
+      "rec",
+      "file-share",
+      "app-share",
+      "whiteboard",
+      "chat"
+   ],
+   "logs":[
+      {
+         "user":"jj",
+         "activity":[
+            {
+               "action":"chat",
+               "time":1
+            },
+            {
+               "action":"chat",
+               "time":10
+            },
+            {
+               "action":"app-control",
+               "time":10
+            },
+            {
+               "action":"rec",
+               "time":11
+            },
+            {
+               "action":"chat",
+               "time":2
+            },
+            {
+               "action":"chat",
+               "time":115
+            }
+         ]
+      },
+      {
+         "user":"ali",
+         "activity":[
+            {
+               "action":"chat",
+               "time":108
+            }
+         ]
+      },
+      {
+         "user":"win",
+         "activity":[
+            {
+               "action":"whiteboard",
+               "time":18
+            },
+            {
+              "action":"chat",
+              "time" : 25
+            },
+            {
+              "action":"rec",
+              "time" : 78
+            }
+         ]
+      }
+   ]
+}
+
+    //Generate random number between min and max
+    function randomInt(min,max)
+    {
+      return Math.floor(Math.random()*(max-min+1)+min);
+    }
+
+    function getRandomTimeStamps( min, max ){
+      var return_list = [];
+
+      var entries =  randomInt( min, max );
+      for ( var i =0; i < entries; i++ ){
+        var day = new Date();
+
+        //Genrate random
+        var previous_date = randomInt(0,365);
+        day.setDate( day.getDate() - previous_date );
+
+        return_list.push( day.getTime() );
+      }
+
+      return return_list;
+
+    }
+    console.log(getRandomTimeStamps(3,5));
+    $(document).ready(function(){
+
+
+      $('#contribution_graph').contribution_graph({
+        chartData: chartData
+    });
+    });
+  </script>
+</head>
+
+<style type="text/css">
+  body { font-family: 'Roboto'; background: #fafafa; }
+  .seperate{
+    height: 20px;
+  }
+  .container { margin: 150px auto; max-width: 960px; }
+</style>
+<body>
+  <div class="container">
+  <h1>jQuery Github Contribution Graph Examples</h1>
+  <div id="contribution_graph"></div>
+</div>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>
